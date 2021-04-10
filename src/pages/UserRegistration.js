@@ -1,6 +1,7 @@
 import {StatusBar} from 'expo-status-bar'
 import React, { useState } from 'react'
 import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Alert } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import FormField from '../components/FormField'
 
@@ -22,12 +23,18 @@ const UserRegistration = () => {
     setForm({ ...form, [name]: value })
   }
 
-  function checkDate() {
-    if ({ ...form === "" }) {
+  async function checkDate() {
+    if ((form.name, form.age, form.email, form.cpf ,form.password, form.confirmPassword) === "") {
       Alert.alert("Preencha todos os campos!")
+      console.log(form.password.value)
+      console.log("Preencha todos os campos!")
     } else {
       try {
-      
+        const newUser = JSON.stringify([form])
+        await AsyncStorage.setItem(`@users/${form.email}`, newUser)
+        const feedback = await AsyncStorage.getItem(`@users/${form.email}`)
+      console.log(form.password.valueOf())
+        console.log(feedback)
       } catch(error) {
         Alert.alert(error)  
       }
@@ -56,7 +63,7 @@ const UserRegistration = () => {
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
-    backgroundColor: "#DDDDDD",
+    backgroundColor: "#FFF",
     padding: 10,
     marginTop: 15
   },
