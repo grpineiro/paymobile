@@ -26,14 +26,12 @@ const UserRegistration = () => {
   async function checkDate() {
     if ((form.name, form.age, form.email, form.cpf ,form.password, form.confirmPassword) === "") {
       Alert.alert("Preencha todos os campos!")
-      console.log(form.password.value)
       console.log("Preencha todos os campos!")
     } else {
       try {
         const newUser = JSON.stringify([form])
         await AsyncStorage.setItem(`@users/${form.email}`, newUser)
         const feedback = await AsyncStorage.getItem(`@users/${form.email}`)
-      console.log(form.password.valueOf())
         console.log(feedback)
       } catch(error) {
         Alert.alert(error)  
