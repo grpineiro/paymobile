@@ -4,6 +4,8 @@ import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Alert } from 'rea
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import FormField from '../components/FormField'
+import { Link } from '@react-navigation/native'
+import globalStyle from '../styles/global'
 
 const UserRegistration = () => {
   const formState = {
@@ -50,35 +52,16 @@ const UserRegistration = () => {
         <FormField nameField={"Senha: "} event={text => handleChange(text, "password")} />
         <FormField nameField={"Confirme a senha: "} event={text => handleChange(text, "confirmPassword")} />
 
-        <TouchableOpacity style={styles.button} onPress={() => checkDate()}>
+        <TouchableOpacity style={globalStyle.button} onPress={() => checkDate()}>
           <Text>Cadastrar</Text>
         </TouchableOpacity>
+
+        
+        <Link style={globalStyle.button} to="/login">Back</Link>
+
       </View>
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    backgroundColor: "#FFF",
-    padding: 10,
-    marginTop: 15
-  },
-  scrollView: {
-    marginVertical: 60,
-    marginHorizontal: 20,
-  },
-  textInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 20,
-    marginBottom: 20
-  }
-})
 
 export default UserRegistration
