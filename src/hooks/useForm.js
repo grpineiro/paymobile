@@ -8,6 +8,14 @@ const types = {
   cpf: {
     regex: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
     message: 'Digite um CPF válido!'
+  },
+  name: {
+    regex: /[A-Z][a-z]* [A-Z][a-z]*/,
+    message: 'Digite seu nome completo!'
+  },
+  password: {
+    regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
+    message: 'Digite uma senha válida! (1 letra maiscula, 1 letra minuscula, 1 caractere especial e 8 digitos)'
   }
 }
 
