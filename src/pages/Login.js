@@ -1,11 +1,28 @@
 import { Link } from '@react-navigation/native'
-import React, { useState } from 'react'
+import { openDatabase } from 'expo-sqlite'
+import React, { useEffect, useState } from 'react'
 import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import FormField from '../components/FormField'
 import globalStyle from '../styles/global'
 
 const Login = () => {
   const [user, setUser] = useState(null)
+
+  const db = openDatabase('AppDatabase.db')
+
+  useEffect(() => {
+    db.transaction(sql => {
+      sql.executeSql('CREATE TABLE IF NOT EXISTS table_user(user_id INTEGER PRIMARY KEY AUTOINCREMENT, user_name VARCHAR(40), age INTEGER, email VARCHAR(60), cpf VARCHAR(14), password VARCHAR(255), balance INTEGER)')
+    })
+
+    db.transaction(sql => {
+      sql.executeSql('SELECT * FROM table_user',
+      null,
+      (txObj, {rows: { _array }}) => console.log(_array),
+      (txObj, error) => console.log('Error ', error)
+    )
+    })
+  }, [])
 
   function handleChange(value, name) {
     setUser({ ...user, [name]: value})
