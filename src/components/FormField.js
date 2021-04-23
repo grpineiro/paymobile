@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-const FormField = ({ nameField, isNumeric, event }) => {
+const FormField = ({ nameField, isNumeric, event, error, placeholder }) => {
   
   return (
     <View>
@@ -10,7 +10,9 @@ const FormField = ({ nameField, isNumeric, event }) => {
         keyboardType={isNumeric ? "numeric" : "default"}
         style={styles.textInput}
         onChangeText={event}
+        placeholder={placeholder}
       />
+      {error && <Text>{error}</Text>}
     </View>
   )
 }
